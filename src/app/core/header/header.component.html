@@ -1,0 +1,22 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+
+  <a class="navbar-brand" routerLink="/">F-TEP</a>
+
+  <button class="navbar-toggler" type="button" (click)="toggleCollapsed()" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" [ngbCollapse]="isCollapsed" id="navbarSupportedContent">
+
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" routerLink="/helpdesk" (click)="toggleCollapsed()">Helpdesk</a>
+      </li>
+    </ul>
+
+    <ul class="my-2 my-lg-0 navbar-nav">
+
+    </ul>
+
+  </div>
+</nav>

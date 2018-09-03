@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { HeaderComponent } from './core/header/header.component';
 
 const appRoutes: Routes = [
-  // { path: '', component: NavbarComponent,  outlet: 'navbar' },
+  { path: '', component: HeaderComponent,  outlet: 'navbar' },
   { path: '', loadChildren: 'src/app/modules/home/home.module#HomeModule' },
   { path: 'helpdesk', loadChildren: 'src/app/modules/helpdesk/helpdesk.module#HelpdeskModule' },
   // { path: 'page-not-found', loadChildren: 'app/pages/page-not-found/page-not-found.module#PageNotFoundModule' },

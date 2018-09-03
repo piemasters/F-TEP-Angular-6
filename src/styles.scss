@@ -1,2 +1,8 @@
 @import 'variables';
 @import '../node_modules/bootstrap/scss/bootstrap';
+
+body {
+  font-size: 0.8rem;
+  height: 100%;
+  padding-top: 56px;
+}
