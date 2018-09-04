@@ -4,7 +4,7 @@ import { environment } from '../../../environments/environment';
 @Component({
   selector: 'app-helpdesk',
   templateUrl: './helpdesk.component.html',
-  styleUrls: ['./helpdesk.component.css']
+  styleUrls: ['./helpdesk.component.scss']
 })
 export class HelpdeskComponent implements OnInit {
   ftepURL = environment.urls.ftepUrl;
