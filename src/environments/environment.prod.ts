@@ -1,6 +1,6 @@
 export const environment = {
   assets: {
-    images: '/src/assets/images'
+    images: '/assets/images'
   },
   urls: {
     ftepUrl: 'https://forestry-tep.eo.esa.int',
