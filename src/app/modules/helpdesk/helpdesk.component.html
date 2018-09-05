@@ -1,30 +1,28 @@
 <div class="page container-fluid">
   <div class="card-columns">
 
-    <div class="card">
-      <div class="card-header">Helpdesk</div>
+    <div id="overview-card" class="card">
+      <div class="card-header">
+        <h2>Overview</h2>
+      </div>
       <div class="card-body">
-        <p i18n>
+        <p>
           The Forestry-TEP portal is divided up into various pages that provide particular functionality. The Explorer
-          page
-          allows users to search for satellite and other data, search and instigate services and to visualise their data
-          using
-          the various GUI applications. The Manage / Share page allows users to share various elements such as Projects,
-          Databaskets, Jobs, Services and data. The My Account page allows users to view their account details and send
-          requests such as for additional TEP-coins. If enabled, the Developer page allows Expert Users to develop, test
-          and release their own processing services.
+          page allows users to search for satellite and other data, search and instigate services and to visualise
+          their data using the various GUI applications.</p>
+        <p>
+          The Manage / Share page allows users to share various elements such as Projects, Databaskets, Jobs, Services
+          and data. The My Account page allows users to view their account details and send requests such as for
+          additional TEP-coins. If enabled, the Developer page allows Expert Users to develop, test and release their
+          own processing services.
         </p>
-
         <p>
           This initial release of the portal exposes a first set of both data and services. Within the coming releases
-          the
-          capabilities, in terms of data, services and resources will be increased.
+          the capabilities, in terms of data, services and resources will be increased.
         </p>
-
         <p>
           The list of services and applications available in the pre-release version includes the following:
         </p>
-
         <div class="row">
           <div class="col">
             <h4>GUI Applications:</h4>
@@ -45,41 +43,40 @@
             </ul>
           </div>
         </div>
-
       </div>
     </div>
 
-    <div class="card">
-      <div class="card-header">Contact and Feedback</div>
+    <div id="contact-card" class="card">
+      <div class="card-header">
+        <h2>Contact and Feedback</h2>
+      </div>
       <div class="card-body">
         <p>
-          Forestry TEP welcomes feedback from you on our project and portal.
-          For help and support on how to use Forestry TEP, please contact us using the
+          Forestry TEP welcomes feedback from you on our project and portal. For help and support on how to use
+          Forestry TEP, please contact us using the
           <a target="_blank" href="https://forestry-tep.eo.esa.int/?q=content/contact">form</a> or sending an email to
           <a href="mailto:forestry-tep@esa.int" target="_top">forestry-tep@esa.int</a>.
         </p>
-
         <p>
           Support is provided via email and an initial response to all queries should be received within two business
           days.
         </p>
-
       </div>
     </div>
 
-    <div class="card">
-      <div class="card-header">Useful Links</div>
+    <div id="useful-links-card" class="card">
+      <div class="card-header">
+        <h2>Useful Links</h2>
+      </div>
       <div class="card-body">
         <div class="row">
           <div class="col-sm-4">
-            <a href="{{ftepURL}}" target="_blank"><img src="{{logo}}" class="card-image" alt="Forestry TEP Logo"></a>
+            <a href="{{ftepURL}}" target="_blank"><img src="{{logoSrc}}" class="card-image" alt="Forestry TEP Logo"></a>
           </div>
           <div class="col-sm-8">
             <blockquote>"One-stop shop for forestry remote sensing services for the academic, public and commercial sectors."</blockquote>
           </div>
         </div>
-
-
       </div>
       <div class="card-footer">
         <a href="{{ftepURL}}/?q=content/terms-conditions" target="_blank" class="card-link">Terms &amp; Conditions</a>
@@ -89,15 +86,10 @@
       </div>
     </div>
 
-
-
-
-
-    <div id="videoclips" class="card">
+    <div id="video-clips-card" class="card">
       <div class="card-header">Tutorial Videos</div>
       <div class="card-body">
         <div class="row">
-
           <div *ngFor="let video of videos" class="col-md-6">
             <figure>
               <a href="{{video.url}}" target="_blank">
@@ -107,10 +99,8 @@
             </figure>
           </div>
         </div>
-
       </div>
     </div>
-
 
   </div>
 </div>
