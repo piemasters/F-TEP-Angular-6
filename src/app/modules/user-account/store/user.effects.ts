@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Store } from '@ngrx/store';
-import { Actions, Effect } from '@ngrx/effects';
+import { Actions, Effect, ofType } from '@ngrx/effects';
 import { map, switchMap } from 'rxjs/operators';
 
 import { User } from '../user.model';
@@ -13,8 +13,8 @@ import { environment } from '../../../../environments/environment';
 export class UserEffects {
   @Effect()
   userFetch = this.actions$
-    .ofType(UserActions.FETCH_ACTIVE_USER)
     .pipe(
+      ofType(UserActions.FETCH_ACTIVE_USER),
       switchMap((action: UserActions.FetchUser) => {
         return this.httpClient.get<User>(environment.urls.ftepUrl + '/users/current', {
           observe: 'body',
