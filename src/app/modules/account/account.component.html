@@ -7,7 +7,6 @@
         <h2>User Details</h2>
       </div>
       <div class="card-body">
-        <button (click)="getUser()">Get User</button>
         <div class="row">
           <b class="col-md-4">Username:</b>
           <div class="col-md-8">{{ (userState | async).activeUser.name }}</div>
@@ -22,7 +21,7 @@
         </div>
         <div class="row">
           <b class="col-md-4">Coin Balance:</b>
-          <div class="col-md-8">{{wallet.balance}}</div>
+          <div class="col-md-8">{{(accountState | async).userWallet.balance }}</div>
         </div>
       </div>
     </div>

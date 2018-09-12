@@ -5,7 +5,7 @@ import { HeaderComponent } from './core/header/header.component';
 const appRoutes: Routes = [
   { path: '', component: HeaderComponent,  outlet: 'navbar' },
   { path: '', loadChildren: 'src/app/modules/home/home.module#HomeModule' },
-  { path: 'account', loadChildren: 'src/app/modules/user-account/user-account.module#UserAccountModule' },
+  { path: 'account', loadChildren: 'src/app/modules/account/account.module#AccountModule' },
   { path: 'helpdesk', loadChildren: 'src/app/modules/helpdesk/helpdesk.module#HelpdeskModule' },
   // { path: 'page-not-found', loadChildren: 'app/pages/page-not-found/page-not-found.module#PageNotFoundModule' },
   // {
