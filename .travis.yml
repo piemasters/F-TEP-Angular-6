@@ -1,0 +1,29 @@
+dist: trusty
+sudo: required
+language: node_js
+node_js:
+  - '8'
+cache:
+  directories:
+  - './node_modules'
+  - '$HOME/.sonar/cache'
+before_install:
+  - npm install -g --silent @angular/cli
+install:
+  - npm install
+jdk:
+  - oraclejdk8
+script:
+  - export CHROME_BIN=chromium-browser
+  - xvfb-run -a npm run test -- --single-run --no-progress --browser=ChromeNoSandbox --cc
+  - xvfb-run -a npm run e2e -- --no-progress --config=protractor-ci.conf.js
+  - sonar-scanner
+before_deploy:
+  - npm run styleguide
+deploy:
+  provider: heroku
+  api_key:
+    secure: HUmbjFhib5e/bnvpAc96f2iBB8+RXWOkdImfWxF0WPS4YAxQsOGwoc4cVPgDfQZUmeCdRqOlVxOG3hercKHMVyxf6zTsa/UtGYVTf09VEn4ZXdNoNXYMGBUm0Wjr2Ph9RXXOk3E6TsQBIWuZO+3bixiE6OZAaC6QUBnsXIMD4KEHC9C1zpkA6oGvo8B4YxsLZFZh7wHiGiYKlR7WA61hpcKwIh1j2m+1vgizcYni/WEmI6vquvhcQx9gjrr+zqqGMe+qKB2nX7mCb0Bl8hzFRzVEjjW6LSnceWkx0X0U1/MhgVbCJWMJ7EVBbWOtVLpxXqH83KZ4bg/GBv63docojeIhaCvdJcWWp/KtOelUB+H9NclmMCieMELelGcH+D8EYKGJl6kj7RReg1Q1QYvzaZX6NTuc5o/+psy51VOv13mXw94gIVu9UH2KO/OrJ3/2+sVdJElFnVAAnBDp2TWu7TLUKCBH9/uPoXAbQmPDbRT3api7+pFMl/MVmpwW7TKR4m3hD816FnoJ6tpc+ZBOp6ZvOHFxNdcA2ARLWwhdQKN2oe+DMQsAn/64ZVms1ZTSn3O2JiIRLomtadS5AQc/cPFp+yJBN6xYJ69pdJfC/m1Ta6MeUtRX8trp/RDO+yGBkMOSCZYePdBtWdf5IRbppBEqHssPC0pySTCKr3Q7QgU=
+  app: davidnorton-ftep
+  on:
+    repo: piemasters/F-TEP-Angular-6
