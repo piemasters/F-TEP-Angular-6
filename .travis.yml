@@ -13,13 +13,6 @@ install:
   - npm install
 jdk:
   - oraclejdk8
-script:
-  - export CHROME_BIN=chromium-browser
-  - xvfb-run -a npm run test -- --single-run --no-progress --browser=ChromeNoSandbox --cc
-  - xvfb-run -a npm run e2e -- --no-progress --config=protractor-ci.conf.js
-  - sonar-scanner
-before_deploy:
-  - npm run styleguide
 deploy:
   provider: heroku
   api_key:
