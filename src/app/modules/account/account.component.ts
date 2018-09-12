@@ -2,18 +2,20 @@ import { Component, OnInit } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { Store } from '@ngrx/store';
 
-import * as UserActions from './store/user.actions';
 import { Observable } from 'rxjs';
-import { FeatureState } from './store/user.reducers';
-import { User } from './user.model';
+import { Wallet } from '../../shared/models/wallet.model';
+import { User } from '../../shared/models/user.model';
+import * as fromAccount from './store/account.reducers';
+import * as AccountActions from './store/account.actions';
 
 @Component({
-  selector: 'app-user-account',
-  templateUrl: './user-account.component.html',
-  styleUrls: ['./user-account.component.scss']
+  selector: 'app-account',
+  templateUrl: './account.component.html',
+  styleUrls: ['./account.component.scss']
 })
-export class UserAccountComponent implements OnInit {
+export class AccountComponent implements OnInit {
   userState: Observable<{ activeUser: User }>;
+  accountState: Observable<{ userWallet: Wallet }>;
   urls = environment.urls;
 
   wallet = {
@@ -37,16 +39,14 @@ export class UserAccountComponent implements OnInit {
   };
 
   constructor(
-    private store: Store<FeatureState>
+    private store: Store<fromAccount.FeatureState>
   ) { }
 
   ngOnInit() {
-    this.userState = this.store.select('activeUser');
-  }
+    this.store.dispatch(new AccountActions.FetchWallet());
 
-  getUser() {
-    this.store.dispatch(new UserActions.FetchUser());
     this.userState = this.store.select('activeUser');
+    this.accountState = this.store.select('account');
   }
 
 }

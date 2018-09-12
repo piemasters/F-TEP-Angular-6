@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-
-// import * as fromUser from '../../store/app.reducers';
-import * as UserActions from './modules/user-account/store/user.actions';
 import { Store } from '@ngrx/store';
-import { FeatureState } from './modules/user-account/store/user.reducers';
+
+import * as AuthActions from './core/auth/store/auth.actions';
+import { AppState } from './store/app.reducers';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -13,10 +13,10 @@ export class AppComponent implements OnInit {
   title = 'F-TEP-v2';
 
   constructor(
-    private store: Store<FeatureState>
+    private store: Store<AppState>
   ) { }
 
   ngOnInit() {
-    this.store.dispatch(new UserActions.FetchUser());
+    this.store.dispatch(new AuthActions.FetchUser());
   }
 }
