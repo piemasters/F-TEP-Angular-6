@@ -4,11 +4,11 @@ addons:
   chrome: stable
 language: node_js
 node_js:
-  - '8'
+- '8'
 cache:
   directories:
-  - './node_modules'
-  - '$HOME/.sonar/cache'
+  - "./node_modules"
+  - "$HOME/.sonar/cache"
 before_script:
 - npm install -g @angular/cli @angular/compiler-cli @angular-devkit/build-angular
 - npm install
@@ -18,7 +18,7 @@ script:
 deploy:
   provider: heroku
   api_key:
-    secure: HUmbjFhib5e/bnvpAc96f2iBB8+RXWOkdImfWxF0WPS4YAxQsOGwoc4cVPgDfQZUmeCdRqOlVxOG3hercKHMVyxf6zTsa/UtGYVTf09VEn4ZXdNoNXYMGBUm0Wjr2Ph9RXXOk3E6TsQBIWuZO+3bixiE6OZAaC6QUBnsXIMD4KEHC9C1zpkA6oGvo8B4YxsLZFZh7wHiGiYKlR7WA61hpcKwIh1j2m+1vgizcYni/WEmI6vquvhcQx9gjrr+zqqGMe+qKB2nX7mCb0Bl8hzFRzVEjjW6LSnceWkx0X0U1/MhgVbCJWMJ7EVBbWOtVLpxXqH83KZ4bg/GBv63docojeIhaCvdJcWWp/KtOelUB+H9NclmMCieMELelGcH+D8EYKGJl6kj7RReg1Q1QYvzaZX6NTuc5o/+psy51VOv13mXw94gIVu9UH2KO/OrJ3/2+sVdJElFnVAAnBDp2TWu7TLUKCBH9/uPoXAbQmPDbRT3api7+pFMl/MVmpwW7TKR4m3hD816FnoJ6tpc+ZBOp6ZvOHFxNdcA2ARLWwhdQKN2oe+DMQsAn/64ZVms1ZTSn3O2JiIRLomtadS5AQc/cPFp+yJBN6xYJ69pdJfC/m1Ta6MeUtRX8trp/RDO+yGBkMOSCZYePdBtWdf5IRbppBEqHssPC0pySTCKr3Q7QgU=
+    secure: YcktPYNoj1wI+A62CqeC7rJz/L34EIiUTslQ7/mErA0NxstgDB9N7asPCyYW2xjIcLDSwOpme9f2+GkpevYfzwxZcSnjOFxTnc12f4YsM5WK7GHw6oSbK/luu6oENN5ei+bFinqCSwkUPh+KkRythgTRtLE+4flnsX82T7JaQw+DsetMYNFk2FcOZFQUUCuWWsse5LE/7pl7K2xwaYbm1ReadhA2ox+1dRDzvF2KE9yXok1ZhA5WW8b9Y57BUxKwWyChIk3fBMJ3NeFjpDeh/owU0nTYqaZQm9ONoXIZKA4tLon9iqavzbstYFX/IgP4/TXuY5zbhRQoy3fVc2BAXSEwsXSHMH+z7a0pYX0L+41o5Zh+Xh/GwS+018VlMpYJPIE6Ea1D45hUlVjPQOd0PLsswYwCaahY3LRNq7bqaZqfBC5dfPjav2sNBCpr7llVPT+ceYtC+rz5vQKwCDVvbQTUsNwpnQvrO75Lt6lMZ2fyS7sq57xv7z8u0jwRaxR2Z6WTGC7hYjY9OQ5mA1PrSlaZVGKvWCPD0Y+zhQZSDjVvsv/xPUiknIiCJNUpugt1wDHt0k2C9T3glWUp1F7vUwrkeYZCCa5KIktoV7uxFTrP6LptOV/EdrZ9+sa/esdlcRsTYtK5A24LH+sGX4WNm9JB2acOBk0hS6NnxDndmoc=
   app: davidnorton-ftep
   on:
     repo: piemasters/F-TEP-Angular-6
