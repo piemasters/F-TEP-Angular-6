@@ -11,7 +11,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { HeaderComponent } from './core/header/header.component';
 import { CustomPipesModule } from './shared/pipes/custom-pipes.module';
 import { reducers } from './store/app.reducers';
-import { AccountEffects } from './modules/account/store/account.effects';
 import { AuthInterceptor } from './core/auth/auth.interceptor';
 import { AuthEffects } from './core/auth/store/auth.effects';
 

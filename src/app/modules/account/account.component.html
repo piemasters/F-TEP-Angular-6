@@ -66,7 +66,7 @@
         </p>
 
         <div class="list-group">
-          <div *ngFor="let transaction of wallet.transactions" class="list-group-item list-group-item-action flex-column align-items-start">
+          <div *ngFor="let transaction of (accountState | async).userWallet._embedded.transactions" class="list-group-item list-group-item-action flex-column align-items-start">
             <h5 class="mb-1">Transaction ID: {{ transaction.id }}</h5>
             <div><b>Balance Change:</b> {{ transaction.balanceChange }}</div>
             <div *ngIf="transaction.type == 'JOB'"><b>Associated Job ID:</b> {{ transaction.associatedId }}</div>
