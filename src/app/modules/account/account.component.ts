@@ -18,26 +18,6 @@ export class AccountComponent implements OnInit {
   accountState: Observable<{ userWallet: Wallet }>;
   urls = environment.urls;
 
-  wallet = {
-    balance: 100,
-    transactions: [
-      {
-        id: 1,
-        type: 'JOB',
-        associatedId: 628,
-        balanceChange: 5,
-        transactionTime: '2017-06-09T13:30:51.544'
-      },
-      {
-        id: 2,
-        type: 'DOWNLOAD',
-        balanceChange: -5,
-        transactionTime: '2017-06-09T13:30:51.544'
-      }
-
-    ]
-  };
-
   constructor(
     private store: Store<fromAccount.FeatureState>
   ) { }

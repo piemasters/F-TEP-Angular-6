@@ -14,7 +14,7 @@ export class AccountEffects {
   constructor(private actions$: Actions, private httpClient: HttpClient, private store: Store<fromAccount.FeatureState>) {}
 
   @Effect()
-  userFetch = this.actions$
+  walletFetch = this.actions$
     .pipe(
       ofType(AccountActions.FETCH_WALLET),
       withLatestFrom(this.store.select('activeUser')),
