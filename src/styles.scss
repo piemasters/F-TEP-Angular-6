@@ -16,3 +16,53 @@ body {
     width: 100%;
   }
 }
+
+
+.spinner {
+  margin: 10px;
+  transition: opacity 0.5s;
+  position:relative;
+  display:inline-block;
+  width:1em;
+  height:1em;
+  font-size:32px;
+  border-bottom:1px solid;
+  vertical-align:middle;
+  overflow:hidden;
+  text-indent:100%;
+  animation:0.5s spinner linear infinite
+}
+.spinner,.spinner:after {
+  border-radius:100%
+}
+.spinner:after {
+  content:"";
+  position:absolute;
+  top:0;
+  right:0;
+  bottom:0;
+  left:0;
+  border:1px solid;
+  opacity:0.5
+}
+.spinner--small {
+  font-size:16px
+}
+.spinner--large {
+  font-size:64px
+}
+.spinner--light {
+  color:#fff
+}
+.spinner--dark {
+  color:#333
+}
+.spinner.hidden {
+  opacity:0
+}
+
+@keyframes spinner {
+  to {
+    transform:rotate(360deg);
+  }
+}

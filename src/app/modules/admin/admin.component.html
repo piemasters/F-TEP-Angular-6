@@ -10,7 +10,8 @@
           <input type="text" placeholder="Search">
 
           <div class="list-group">
-            <div *ngFor="let user of (adminState | async).userList" class="list-group-item list-group-item-action flex-column align-items-start">
+            <div *ngFor="let user of (adminState | async).userList | paginate: { id: 'users', itemsPerPage: pageSize, currentPage: currentPage, totalItems: total }"
+                 class="list-group-item list-group-item-action flex-column align-items-start">
               <div class="list-icon">
                 <fa-icon [icon]="['fas', 'user']"></fa-icon>
               </div>
@@ -21,6 +22,11 @@
               </div>
 
             </div>
+          </div>
+
+          <div class="has-text-centered">
+            <div class="spinner" [ngClass]="{ 'hidden': !loading }"></div>
+            <pagination-controls (pageChange)="getPage($event)" id="users"></pagination-controls>
           </div>
 
         </div>

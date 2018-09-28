@@ -12,6 +12,7 @@ import { AdminEffects } from './store/admin.effects';
 import { library } from '@fortawesome/fontawesome-svg-core';
 
 import { faUser } from '@fortawesome/free-solid-svg-icons';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 library.add(faUser);
 
@@ -24,7 +25,8 @@ library.add(faUser);
     AdminRoutingModule,
     StoreModule.forFeature('admin', adminReducer),
     EffectsModule.forFeature([AdminEffects]),
-    FontAwesomeModule
+    FontAwesomeModule,
+    NgxPaginationModule
   ],
   providers: [
 
