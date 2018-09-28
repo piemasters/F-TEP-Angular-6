@@ -9,6 +9,7 @@ import { reducers } from '../../store/app.reducers';
 import { HttpClientModule } from '@angular/common/http';
 import { adminReducer } from './store/admin.reducers';
 import { AdminEffects } from './store/admin.effects';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 describe('AdminComponent', () => {
   let component: AdminComponent;
@@ -24,7 +25,8 @@ describe('AdminComponent', () => {
         StoreModule.forRoot(reducers),
         EffectsModule.forRoot([]),
         StoreModule.forFeature('admin', adminReducer),
-        EffectsModule.forFeature([AdminEffects])
+        EffectsModule.forFeature([AdminEffects]),
+        FontAwesomeModule
       ],
     })
     .compileComponents();
