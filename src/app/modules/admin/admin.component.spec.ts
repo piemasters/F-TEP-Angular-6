@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { adminReducer } from './store/admin.reducers';
 import { AdminEffects } from './store/admin.effects';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 describe('AdminComponent', () => {
   let component: AdminComponent;
@@ -26,7 +27,8 @@ describe('AdminComponent', () => {
         EffectsModule.forRoot([]),
         StoreModule.forFeature('admin', adminReducer),
         EffectsModule.forFeature([AdminEffects]),
-        FontAwesomeModule
+        FontAwesomeModule,
+        NgxPaginationModule
       ],
     })
     .compileComponents();
