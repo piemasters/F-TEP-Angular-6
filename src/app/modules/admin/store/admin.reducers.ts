@@ -6,12 +6,14 @@ export interface FeatureState extends fromAdmin.AppState {
   userList: User[];
   userLinks: {};
   userPage: {};
+  userSearchFilter: string;
 }
 
 export interface State {
   userList: User[];
   userLinks: {};
   userPage: {};
+  userSearchFilter: string;
 }
 
 const initialState: State = {
@@ -20,7 +22,8 @@ const initialState: State = {
     new User('Second User', 'GUEST', 'test2.user@example.com', 2)
   ],
   userLinks: {},
-  userPage: {}
+  userPage: {},
+  userSearchFilter: ''
 };
 
 export function adminReducer(state = initialState, action: AdminActions.AdminActions) {

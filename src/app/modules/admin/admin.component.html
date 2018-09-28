@@ -7,7 +7,8 @@
           <h2>User List</h2>
         </div>
         <div class="card-body">
-          <input type="text" placeholder="Search">
+          <input #userFilter type="text" placeholder="Search" (input)="filterUsers(userFilter.value)"
+                 (keyup)="filterUsers(userFilter.value)" (click)="filterUsers(userFilter.value)">
 
           <div class="list-group">
             <div *ngFor="let user of (adminState | async).userList | paginate: { id: 'users', itemsPerPage: pageSize, currentPage: currentPage, totalItems: total }"

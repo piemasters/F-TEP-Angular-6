@@ -31,6 +31,11 @@ export class AdminComponent implements OnInit {
     this.getPage(1);
   }
 
+
+  filterUsers(filter) {
+    this.store.dispatch(new AdminActions.SetUserFilter(filter));
+  }
+
   getPage(page: number) {
     this.loading = true;
     this.currentPage = page;
