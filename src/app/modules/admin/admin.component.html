@@ -11,7 +11,12 @@
                  (keyup)="filterUsers(userFilter.value)" (click)="filterUsers(userFilter.value)">
 
           <div class="list-group">
-            <div *ngFor="let user of (adminState | async).userList | paginate: { id: 'users', itemsPerPage: pageSize, currentPage: currentPage, totalItems: total }"
+            <div *ngFor="let user of (adminState | async).userList | paginate: {
+            id: 'users',
+            itemsPerPage: (adminState | async).userPage.size,
+            currentPage: (adminState | async).userPage.number,
+            totalItems: (adminState | async).userPage.totalElements
+            }"
                  class="list-group-item list-group-item-action flex-column align-items-start">
               <div class="list-icon">
                 <fa-icon [icon]="['fas', 'user']"></fa-icon>

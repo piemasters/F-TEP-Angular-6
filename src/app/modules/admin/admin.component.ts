@@ -14,9 +14,6 @@ import * as AdminActions from './store/admin.actions';
 export class AdminComponent implements OnInit {
   userState: Observable<{ activeUser: User }>;
   adminState: Observable<{ userList: User[], userLinks, userPage }>;
-  pageSize = 1;
-  currentPage = 1;
-  total: number;
   loading: boolean;
 
   constructor(
@@ -27,6 +24,11 @@ export class AdminComponent implements OnInit {
     this.store.dispatch(new AdminActions.FetchUserList());
     this.userState = this.store.select('activeUser');
     this.adminState = this.store.select('admin');
+    // this.adminState.subscribe(res => {
+    //   this.pageObject = res;
+    //     this.pageSize = this.pageObject.userPage.size;
+    //   }
+    // );
 
     this.getPage(1);
   }
@@ -38,7 +40,6 @@ export class AdminComponent implements OnInit {
 
   getPage(page: number) {
     this.loading = true;
-    this.currentPage = page;
     this.loading = false;
 
     // this.asyncMeals = serverCall(this.meals, page)
