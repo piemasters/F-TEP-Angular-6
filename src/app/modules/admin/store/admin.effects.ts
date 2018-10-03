@@ -18,31 +18,10 @@ export class AdminEffects {
       ofType(AdminActions.FETCH_USER_LIST),
       withLatestFrom(this.store.select('admin')),
       switchMap(([action, state]) => {
-        return this.httpClient.get<any>(environment.apiServer.apiUrl + '/users/?page='
-          + (state.userPage.number - 1), {
-          observe: 'body',
-          responseType: 'json'
-        });
-      }),
-      map(
-        (usersResponse) => {
-          return {
-              type: AdminActions.SET_USER_LIST,
-              payload: usersResponse
-            };
-        }
-      )
-    );
-
-  @Effect()
-  userListFilterFetch = this.actions$
-    .pipe(
-      ofType(AdminActions.FETCH_USER_FILTERED_LIST),
-      withLatestFrom(this.store.select('admin')),
-      switchMap(([action, state]) => {
-        return this.httpClient.get<any>(
-          environment.apiServer.apiUrl + '/users/search/byFilter?sort=name&filter='
-          + state.userSearchFilter ? state.userSearchFilter : '', {
+        return this.httpClient.get<any>(environment.apiServer.apiUrl
+          + '/users/search/byFilter?sort=name&filter='
+          + (state.userSearchFilter ? state.userSearchFilter : '')
+          + '&page=' + (state.userPage.number - 1 > 0 ? state.userPage.number - 1 : 0), {
           observe: 'body',
           responseType: 'json'
         });
@@ -56,4 +35,5 @@ export class AdminEffects {
         }
       )
     );
+
 }

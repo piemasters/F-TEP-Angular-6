@@ -35,10 +35,15 @@ export function adminReducer(state = initialState, action: AdminActions.AdminAct
         userLinks: action.payload._links,
         userPage: action.payload.page
       };
+    case AdminActions.SET_USER_FILTER:
+      return {
+        ...state,
+        userSearchFilter: action.payload
+      };
     case AdminActions.SET_USER_PAGE:
       return {
         ...state,
-        userPage: {...state, number: action.payload.page}
+        userPage: { ...state, number: action.payload.page }
       };
     default:
       return state;

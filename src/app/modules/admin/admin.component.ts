@@ -26,20 +26,28 @@ export class AdminComponent implements OnInit {
     this.adminState = this.store.select('admin');
   }
 
+  updateUserList(action, payload) {
+    this.loading = true;
 
-  filterUsers(filter) {
-    this.store.dispatch(new AdminActions.SetUserFilter(filter));
+    if (action === 'filter') {
+      this.store.dispatch(new AdminActions.SetUserFilter(payload));
+    } else if (action === 'page') {
+      this.store.dispatch(new AdminActions.SetUserPage(payload));
+    }
+
+    this.store.dispatch(new AdminActions.FetchUserList());
+
+    setTimeout(() => {
+      this.loading = false;
+    }, 400);
+  }
+
+  filterUsers(event, filter) {
+    this.updateUserList('filter', filter);
   }
 
   getPage(page: number) {
-    this.loading = true;
-
-    this.store.dispatch(new AdminActions.SetUserPage({ page: page }));
-    this.store.dispatch(new AdminActions.FetchUserList());
-
-      setTimeout(() => {
-        this.loading = false;
-      }, 600);
+    this.updateUserList('page', { page: page });
   }
 
 }
