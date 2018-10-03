@@ -15,6 +15,7 @@ export class AdminComponent implements OnInit {
   userState: Observable<{ activeUser: User }>;
   adminState: Observable<{ userList: User[], userLinks, userPage }>;
   loading: boolean;
+  adminSubscriber;
 
   constructor(
     private store: Store<fromAdmin.FeatureState>
@@ -24,13 +25,15 @@ export class AdminComponent implements OnInit {
     this.store.dispatch(new AdminActions.FetchUserList());
     this.userState = this.store.select('activeUser');
     this.adminState = this.store.select('admin');
-    // this.adminState.subscribe(res => {
-    //   this.pageObject = res;
-    //     this.pageSize = this.pageObject.userPage.size;
-    //   }
-    // );
 
-    this.getPage(1);
+    this.store.select('admin').subscribe((adminState: fromAdmin.State) => {
+      this.adminSubscriber = adminState.userPage;
+      setTimeout(() => {
+        this.loading = false;
+      }, 600);
+
+
+    });
   }
 
 
@@ -40,15 +43,10 @@ export class AdminComponent implements OnInit {
 
   getPage(page: number) {
     this.loading = true;
-    this.loading = false;
-
-    // this.asyncMeals = serverCall(this.meals, page)
-    //   .do(res => {
-    //     this.total = res.total;
-    //     this.p = page;
-    //     this.loading = false;
-    //   })
-    //   .map(res => res.items);
+    this.store.dispatch(new AdminActions.SetUserPage({
+      page: page
+    }));
+    this.store.dispatch(new AdminActions.FetchUserList());
   }
 
 }

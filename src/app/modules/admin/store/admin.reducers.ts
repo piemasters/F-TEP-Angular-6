@@ -22,7 +22,7 @@ const initialState: State = {
     new User('Second User', 'GUEST', 'test2.user@example.com', 2)
   ],
   userLinks: {},
-  userPage: {},
+  userPage: { size: 20, totalElements: 2, totalPages: 1, number: 0 },
   userSearchFilter: ''
 };
 
@@ -34,6 +34,11 @@ export function adminReducer(state = initialState, action: AdminActions.AdminAct
         userList: action.payload._embedded.users,
         userLinks: action.payload._links,
         userPage: action.payload.page
+      };
+    case AdminActions.SET_USER_PAGE:
+      return {
+        ...state,
+        userPage: {...state, number: action.payload.page}
       };
     default:
       return state;

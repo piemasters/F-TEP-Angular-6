@@ -16,8 +16,10 @@ export class AdminEffects {
   userListFetch = this.actions$
     .pipe(
       ofType(AdminActions.FETCH_USER_LIST),
-      switchMap((action: AdminActions.FetchUserList) => {
-        return this.httpClient.get<any>(environment.apiServer.apiUrl + '/users/' , {
+      withLatestFrom(this.store.select('admin')),
+      switchMap(([action, state]) => {
+        return this.httpClient.get<any>(environment.apiServer.apiUrl + '/users/?page='
+          + (state.userPage.number - 1), {
           observe: 'body',
           responseType: 'json'
         });

@@ -12,10 +12,10 @@
 
           <div class="list-group">
             <div *ngFor="let user of (adminState | async).userList | paginate: {
-            id: 'users',
-            itemsPerPage: (adminState | async).userPage.size,
-            currentPage: (adminState | async).userPage.number,
-            totalItems: (adminState | async).userPage.totalElements
+              id: 'users',
+              itemsPerPage: (adminState | async).userPage.size,
+              currentPage: (adminState | async).userPage.number + 1,
+              totalItems: (adminState | async).userPage.totalElements
             }"
                  class="list-group-item list-group-item-action flex-column align-items-start">
               <div class="list-icon">
@@ -43,12 +43,9 @@
     <div class="col-md-6">
 
       <h2>Paging</h2>
-      <p>size: {{ (adminState | async).userPage.size }}</p>
-      <p>totalElements: {{ (adminState | async).userPage.totalElements }}</p>
-      <p>totalPages: {{ (adminState | async).userPage.totalPages }}</p>
-      <p>number: {{ (adminState | async).userPage.number }}</p>
-
-
+      {{adminSubscriber | json}}
+      <p>--------</p>
+      {{ ((adminState | async).userPage) | json }}
     </div>
   </div>
 </div>
