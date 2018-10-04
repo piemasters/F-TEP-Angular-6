@@ -18,6 +18,7 @@ export class AdminComponent implements OnInit {
   adminState: Observable<{ userList: User[], userLinks, userPage, userSearch }>;
   sortValues = ['id', 'name', 'role', 'email'];
   loading: boolean;
+  activeUser = { id: null, name: null, email: null, role: null };
 
   constructor(
     private store: Store<fromAdmin.FeatureState>
@@ -49,7 +50,7 @@ export class AdminComponent implements OnInit {
   }
 
   selectUser(user) {
-      console.log(user);
+     this.activeUser = user;
   }
 
 }
