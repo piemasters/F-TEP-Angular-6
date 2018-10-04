@@ -18,9 +18,9 @@ export class AdminEffects {
       ofType(AdminActions.FETCH_USER_LIST),
       withLatestFrom(this.store.select('admin')),
       switchMap(([action, state]) => {
-        return this.httpClient.get<any>(environment.apiServer.apiUrl
-          + '/users/search/byFilter?sort=name&filter='
-          + (state.userSearchFilter ? state.userSearchFilter : '')
+        return this.httpClient.get<any>(environment.apiServer.apiUrl + '/users/search/byFilter'
+          + '?sort='  + (state.userSearch.sort ? state.userSearch.sort : '')
+          + '&filter=' + (state.userSearch.filter ? state.userSearch.filter : '')
           + '&page=' + (state.userPage.number - 1 > 0 ? state.userPage.number - 1 : 0), {
           observe: 'body',
           responseType: 'json'

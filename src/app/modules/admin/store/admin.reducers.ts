@@ -6,14 +6,14 @@ export interface FeatureState extends fromAdmin.AppState {
   userList: User[];
   userLinks: {};
   userPage: {};
-  userSearchFilter: string;
+  userSearch: {};
 }
 
 export interface State {
   userList: User[];
   userLinks: {};
   userPage: {};
-  userSearchFilter: string;
+  userSearch: {};
 }
 
 const initialState: State = {
@@ -23,7 +23,7 @@ const initialState: State = {
   ],
   userLinks: {},
   userPage: { size: 20, totalElements: 2, totalPages: 1, number: 0 },
-  userSearchFilter: ''
+  userSearch: { filter: '', sort: 'name'}
 };
 
 export function adminReducer(state = initialState, action: AdminActions.AdminActions) {
@@ -35,15 +35,15 @@ export function adminReducer(state = initialState, action: AdminActions.AdminAct
         userLinks: action.payload._links,
         userPage: action.payload.page
       };
-    case AdminActions.SET_USER_FILTER:
-      return {
-        ...state,
-        userSearchFilter: action.payload
-      };
     case AdminActions.SET_USER_PAGE:
       return {
         ...state,
         userPage: { ...state, number: action.payload }
+      };
+    case AdminActions.SET_USER_SEARCH:
+      return {
+        ...state,
+        userSearch: { ...state, filter: action.payload.filter, sort: action.payload.sort }
       };
     default:
       return state;

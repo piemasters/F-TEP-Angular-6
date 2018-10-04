@@ -13,6 +13,7 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { NgbDropdown, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 library.add(faUser);
 
@@ -26,7 +27,8 @@ library.add(faUser);
     StoreModule.forFeature('admin', adminReducer),
     EffectsModule.forFeature([AdminEffects]),
     FontAwesomeModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    NgbModule
   ],
   providers: [
 

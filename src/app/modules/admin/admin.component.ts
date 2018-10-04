@@ -15,10 +15,11 @@ import { debounceTime } from 'rxjs/operators';
 export class AdminComponent implements OnInit {
   private subject: Subject<any> = new Subject();
   userState: Observable<{ activeUser: User }>;
-  adminState: Observable<{ userList: User[], userLinks, userPage }>;
+  adminState: Observable<{ userList: User[], userLinks, userPage, userSearch }>;
+  sortValues = ['id', 'name', 'role', 'email'];
   loading: boolean;
 
-    constructor(
+  constructor(
     private store: Store<fromAdmin.FeatureState>
   ) { }
 
@@ -38,19 +39,17 @@ export class AdminComponent implements OnInit {
   updateUserList(action) {
     this.loading = true;
 
-    if (action.filter) {
-      this.store.dispatch(new AdminActions.SetUserFilter(action.filter));
-    }
-
-    if (action.page) {
-      this.store.dispatch(new AdminActions.SetUserPage(action.page));
-    }
-
+    this.store.dispatch(new AdminActions.SetUserSearch({ filter: action.filter, sort: action.sort }));
+    this.store.dispatch(new AdminActions.SetUserPage(action.page));
     this.store.dispatch(new AdminActions.FetchUserList());
 
     setTimeout(() => {
       this.loading = false;
     }, 400);
+  }
+
+  selectUser(user) {
+      console.log(user);
   }
 
 }

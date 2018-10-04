@@ -7,14 +7,26 @@
           <h2>User List</h2>
         </div>
         <div class="card-body">
+
           <input #userFilter type="text" placeholder="Search" (keyup)="onFilterKeyUp({'filter': userFilter.value})">
+          <div ngbDropdown class="d-inline-block">
+            <button class="btn btn-primary" id="sort-dropdown" ngbDropdownToggle>
+              Sort by: {{(adminState | async).userSearch.sort}}
+            </button>
+            <div ngbDropdownMenu aria-labelledby="sort-dropdown">
+              <button *ngFor="let val of sortValues" class="dropdown-item" (click)="updateUserList({'sort': val})">
+                {{val}}
+              </button>
+            </div>
+          </div>
+
           <div class="list-group">
             <div *ngFor="let user of (adminState | async).userList | paginate: {
                     id: 'users',
                     itemsPerPage: (adminState | async).userPage.size,
                     currentPage: (adminState | async).userPage.number + 1,
                     totalItems: (adminState | async).userPage.totalElements
-                  }"
+                  }" (click)="selectUser(user)"
                  class="list-group-item list-group-item-action flex-column align-items-start">
               <div class="list-icon">
                 <fa-icon [icon]="['fas', 'user']"></fa-icon>
@@ -24,7 +36,6 @@
                 <div><b>Email:</b> {{ user.email }}</div>
                 <div><b>Role:</b> {{ user.role }}</div>
               </div>
-
             </div>
           </div>
 
@@ -36,11 +47,10 @@
         </div>
       </div>
 
-    </div>
 
-    <div class="col-md-6">
       <h2>Selected User</h2>
       ...
     </div>
+
   </div>
 </div>
