@@ -11,6 +11,7 @@ import { adminReducer } from './store/admin.reducers';
 import { AdminEffects } from './store/admin.effects';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 describe('AdminComponent', () => {
   let component: AdminComponent;
@@ -28,7 +29,8 @@ describe('AdminComponent', () => {
         StoreModule.forFeature('admin', adminReducer),
         EffectsModule.forFeature([AdminEffects]),
         FontAwesomeModule,
-        NgxPaginationModule
+        NgxPaginationModule,
+        NgbModule
       ],
     })
     .compileComponents();
