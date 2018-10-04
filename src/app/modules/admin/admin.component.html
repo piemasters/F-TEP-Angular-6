@@ -7,9 +7,7 @@
           <h2>User List</h2>
         </div>
         <div class="card-body">
-          <input #userFilter type="text" placeholder="Search" (input)="filterUsers($event, userFilter.value)"
-                 (keyup)="filterUsers($event, userFilter.value)" (click)="filterUsers($event, userFilter.value)">
-
+          <input #userFilter type="text" placeholder="Search" (keyup)="onFilterKeyUp({'filter': userFilter.value})">
           <div class="list-group">
             <div *ngFor="let user of (adminState | async).userList | paginate: {
                     id: 'users',
@@ -32,7 +30,7 @@
 
           <div class="has-text-centered">
             <div class="spinner" [ngClass]="{ 'hidden': !loading }"></div>
-            <pagination-controls (pageChange)="getPage($event)" id="users"></pagination-controls>
+            <pagination-controls (pageChange)="updateUserList({'page': $event})" id="users"></pagination-controls>
           </div>
 
         </div>

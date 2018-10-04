@@ -43,7 +43,7 @@ export function adminReducer(state = initialState, action: AdminActions.AdminAct
     case AdminActions.SET_USER_PAGE:
       return {
         ...state,
-        userPage: { ...state, number: action.payload.page }
+        userPage: { ...state, number: action.payload }
       };
     default:
       return state;
