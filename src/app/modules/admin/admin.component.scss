@@ -24,16 +24,20 @@
 
 .list-group {
   margin: 1rem 0.5rem;
+  .list-group-item {
+    cursor: pointer;
+    .list-icon {
+      align-items: center;
+      display: flex;
+      float: left;
+      height: 100%;
+      padding-right: 1rem;
+    }
+  }
+
 }
 
-.list-icon {
-  align-items: center;
-  display: flex;
-  float: left;
-  height: 100%;
-  padding-right: 1rem;
-}
 
-.has-text-centered {
-  text-align:center;
-}
+
+
+

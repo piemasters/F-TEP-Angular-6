@@ -8,17 +8,27 @@
         </div>
         <div class="card-body">
 
-          <input #userFilter type="text" placeholder="Search" (keyup)="onFilterKeyUp({'filter': userFilter.value})">
-          <div ngbDropdown class="d-inline-block">
-            <button class="btn btn-primary" id="sort-dropdown" ngbDropdownToggle>
-              Sort by: {{(adminState | async).userSearch.sort}}
-            </button>
-            <div ngbDropdownMenu aria-labelledby="sort-dropdown">
-              <button *ngFor="let val of sortValues" class="dropdown-item" (click)="updateUserList({'sort': val})">
-                {{val}}
-              </button>
+          <div class="filters-container">
+            <div class="input-group">
+
+              <input id="search-filter"  class="form-control" #userFilter type="text" placeholder="Search" (keyup)="onFilterKeyUp({'filter': userFilter.value})">
+              <div class="input-group-append">
+                <div id="sort-dropdown" ngbDropdown class="d-inline-block">
+                  <button class="btn btn-primary input-group-text" ngbDropdownToggle>
+                    Sort by: {{(adminState | async).userSearch.sort}}
+                  </button>
+                  <div ngbDropdownMenu aria-labelledby="sort-dropdown">
+                    <button *ngFor="let val of sortValues" class="dropdown-item" (click)="updateUserList({'sort': val})">
+                      {{val}}
+                    </button>
+                  </div>
+                </div>
+              </div>
             </div>
+
           </div>
+
+
 
           <div class="list-group">
             <div *ngFor="let user of (adminState | async).userList | paginate: {
@@ -39,7 +49,7 @@
             </div>
           </div>
 
-          <div class="has-text-centered">
+          <div class="centered-text">
             <div class="spinner" [ngClass]="{ 'hidden': !loading }"></div>
             <pagination-controls (pageChange)="updateUserList({'page': $event})" id="users"></pagination-controls>
           </div>
