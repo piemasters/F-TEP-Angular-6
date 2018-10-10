@@ -14,8 +14,8 @@ import * as AccountActions from './store/account.actions';
   styleUrls: ['./account.component.scss']
 })
 export class AccountComponent implements OnInit {
-  userState: Observable<{ activeUser: User }>;
-  accountState: Observable<{ userWallet: Wallet }>;
+  activeUserState: Observable<{ activeUser: User }>;
+  accountState: Observable<{ activeUserWallet: Wallet }>;
   urls = environment.urls;
 
   constructor(
@@ -25,7 +25,7 @@ export class AccountComponent implements OnInit {
   ngOnInit() {
     this.store.dispatch(new AccountActions.FetchWallet());
 
-    this.userState = this.store.select('activeUser');
+    this.activeUserState = this.store.select('activeUser');
     this.accountState = this.store.select('account');
   }
 

@@ -15,7 +15,7 @@
               <div class="input-group-append">
                 <div id="sort-dropdown" ngbDropdown class="d-inline-block">
                   <button class="btn btn-primary input-group-text" ngbDropdownToggle>
-                    Sort by: {{(adminState | async).userSearch.sort}}
+                    Sort by: {{(usersState | async).userSearch.sort}}
                   </button>
                   <div ngbDropdownMenu aria-labelledby="sort-dropdown">
                     <button *ngFor="let val of sortValues" class="dropdown-item" (click)="updateUserList({'sort': val})">
@@ -31,11 +31,11 @@
 
 
           <div class="list-group">
-            <div *ngFor="let user of (adminState | async).userList | paginate: {
+            <div *ngFor="let user of (usersState | async).userList | paginate: {
                     id: 'users',
-                    itemsPerPage: (adminState | async).userPage.size,
-                    currentPage: (adminState | async).userPage.number + 1,
-                    totalItems: (adminState | async).userPage.totalElements
+                    itemsPerPage: (usersState | async).userPage.size,
+                    currentPage: (usersState | async).userPage.number + 1,
+                    totalItems: (usersState | async).userPage.totalElements
                   }" (click)="selectUser(user)"
                  class="list-group-item list-group-item-action flex-column align-items-start">
               <div class="list-icon">
@@ -60,10 +60,15 @@
 
     <div class="col-md-6">
       <h2>Selected User</h2>
-      <p>ID: {{activeUser.id}}</p>
-      <p>Name: {{activeUser.name}}</p>
-      <p>Email: {{activeUser.email}}</p>
-      <p>Role: {{activeUser.role}}</p>
+      <p>ID: {{(usersState | async).selectedUser.id}}</p>
+      <p>Name: {{(usersState | async).selectedUser.name}}</p>
+      <p>Email: {{(usersState | async).selectedUser.email}}</p>
+      <p>Role: {{(usersState | async).selectedUser.role}}</p>
+
+      <div class="row">
+        <b class="col-md-4">Coin Balance:</b>
+        <div class="col-md-8">{{(usersState | async).userWallet.balance }}</div>
+      </div>
     </div>
 
   </div>

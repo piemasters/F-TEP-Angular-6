@@ -4,13 +4,12 @@ import { User } from './user.model';
 export class Wallet {
 
   public balance: number;
-  public _embedded: {
-    owner: User,
-    transactions: Transaction[]
-  };
+  public owner: User;
+  transactions: Transaction[];
 
-  constructor(balance: number, _embedded: { owner: User, transactions: Transaction[] }) {
+  constructor(balance: number, owner: User, transactions: Transaction[] ) {
     this.balance = balance;
-    this._embedded = _embedded;
+    this.owner = owner;
+    this.transactions = transactions;
   }
 }

@@ -1,11 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable, Subject } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 
 import { User } from '../../shared/models/user.model';
+import { Wallet } from '../../shared/models/wallet.model';
 import * as fromAdmin from './store/admin.reducers';
 import * as AdminActions from './store/admin.actions';
-import { debounceTime } from 'rxjs/operators';
+import * as UsersActions from '../../store/users/users.actions';
+import * as fromUsers from '../../store/users/users.reducers';
 
 @Component({
   selector: 'app-account',
@@ -14,23 +17,30 @@ import { debounceTime } from 'rxjs/operators';
 })
 export class AdminComponent implements OnInit {
   private subject: Subject<any> = new Subject();
-  userState: Observable<{ activeUser: User }>;
-  adminState: Observable<{ userList: User[], userLinks, userPage, userSearch }>;
+  activeUserState: Observable<{ activeUser: User }>;
+  // adminState: Observable<{ userList: User[], userLinks, userPage, userSearch }>;
+  usersState: Observable<{ userWallet: Wallet, selectedUser: User, userList: User[], userLinks, userPage, userSearch }>;
+  userList;
+
   sortValues = ['id', 'name', 'role', 'email'];
   loading: boolean;
-  activeUser = { id: null, name: null, email: null, role: null };
 
   constructor(
     private store: Store<fromAdmin.FeatureState>
   ) { }
 
   ngOnInit() {
-    this.store.dispatch(new AdminActions.FetchUserList());
-    this.userState = this.store.select('activeUser');
-    this.adminState = this.store.select('admin');
+    this.store.dispatch(new UsersActions.FetchUserList());
+    this.activeUserState = this.store.select('activeUser');
+    this.usersState = this.store.select('users');
     this.subject.pipe(debounceTime(500)).subscribe(action => {
       this.updateUserList(action);
     });
+
+    const userList = this.usersState.subscribe((usersState: fromUsers.State) => {
+      this.userList = usersState.userList;
+    });
+    this.selectUser(this.userList[0]);
   }
 
   onFilterKeyUp(action) {
@@ -40,9 +50,9 @@ export class AdminComponent implements OnInit {
   updateUserList(action) {
     this.loading = true;
 
-    this.store.dispatch(new AdminActions.SetUserSearch({ filter: action.filter, sort: action.sort }));
-    this.store.dispatch(new AdminActions.SetUserPage(action.page));
-    this.store.dispatch(new AdminActions.FetchUserList());
+    this.store.dispatch(new UsersActions.SetUserSearch({ filter: action.filter, sort: action.sort }));
+    this.store.dispatch(new UsersActions.SetUserPage(action.page));
+    this.store.dispatch(new UsersActions.FetchUserList());
 
     setTimeout(() => {
       this.loading = false;
@@ -50,7 +60,9 @@ export class AdminComponent implements OnInit {
   }
 
   selectUser(user) {
-     this.activeUser = user;
+    this.store.dispatch(new UsersActions.SetUser(user));
+    this.store.dispatch(new UsersActions.FetchUser());
+    this.store.dispatch(new UsersActions.FetchWallet());
   }
 
 }

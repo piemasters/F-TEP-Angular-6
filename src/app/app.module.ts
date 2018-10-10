@@ -13,6 +13,7 @@ import { CustomPipesModule } from './shared/pipes/custom-pipes.module';
 import { reducers } from './store/app.reducers';
 import { AuthInterceptor } from './core/auth/auth.interceptor';
 import { AuthEffects } from './core/auth/store/auth.effects';
+import { UsersEffects } from './store/users/users.effects';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,7 @@ import { AuthEffects } from './core/auth/store/auth.effects';
     NgbModule,
     CustomPipesModule,
     StoreModule.forRoot(reducers),
-    EffectsModule.forRoot([AuthEffects]),
+    EffectsModule.forRoot([AuthEffects, UsersEffects]),
     StoreRouterConnectingModule,
     HttpClientModule
   ],

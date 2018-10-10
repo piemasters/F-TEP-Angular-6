@@ -9,19 +9,19 @@
         <div class="card-body">
           <div class="row">
             <b class="col-md-4">Username:</b>
-            <div class="col-md-8">{{ (userState | async).activeUser.name }}</div>
+            <div class="col-md-8">{{ (activeUserState | async).activeUser.name }}</div>
           </div>
           <div class="row">
             <b class="col-md-4">Role:</b>
-            <div class="col-md-8">{{ (userState | async).activeUser.role }}</div>
+            <div class="col-md-8">{{ (activeUserState | async).activeUser.role }}</div>
           </div>
           <div class="row">
             <b class="col-md-4">Email:</b>
-            <div class="col-md-8">{{ (userState | async).activeUser.email }}</div>
+            <div class="col-md-8">{{ (activeUserState | async).activeUser.email }}</div>
           </div>
           <div class="row">
             <b class="col-md-4">Coin Balance:</b>
-            <div class="col-md-8">{{(accountState | async).userWallet.balance }}</div>
+            <div class="col-md-8">{{(accountState | async).activeUserWallet.balance }}</div>
           </div>
         </div>
       </div>
@@ -66,7 +66,7 @@
           </p>
 
           <div class="list-group">
-            <div *ngFor="let transaction of (accountState | async).userWallet._embedded.transactions" class="list-group-item list-group-item-action flex-column align-items-start">
+            <div *ngFor="let transaction of (accountState | async).activeUserWallet.transactions" class="list-group-item list-group-item-action flex-column align-items-start">
               <h5 class="mb-1">Transaction ID: {{ transaction.id }}</h5>
               <div><b>Balance Change:</b> {{ transaction.balanceChange }}</div>
               <div *ngIf="transaction.type == 'JOB'"><b>Associated Job ID:</b> {{ transaction.associatedId }}</div>
@@ -77,8 +77,6 @@
 
         </div>
       </div>
-
-
 
     </div>
   </div>

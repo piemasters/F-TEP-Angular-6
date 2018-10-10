@@ -9,6 +9,7 @@ import { environment } from '../../../../environments/environment';
 import { Store } from '@ngrx/store';
 import * as fromAccount from './account.reducers';
 
+
 @Injectable()
 export class AccountEffects {
   constructor(private actions$: Actions, private httpClient: HttpClient, private store: Store<fromAccount.FeatureState>) {}
@@ -33,6 +34,4 @@ export class AccountEffects {
         }
       )
     );
-
-
 }
