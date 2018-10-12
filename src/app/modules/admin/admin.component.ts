@@ -62,7 +62,11 @@ export class AdminComponent implements OnInit {
   selectUser(user) {
     this.store.dispatch(new UsersActions.SetUser(user));
     this.store.dispatch(new UsersActions.FetchUser());
-    this.store.dispatch(new UsersActions.FetchWallet());
+    // this.store.dispatch(new UsersActions.FetchWallet());
   }
 
+  getWallet() {
+    this.store.dispatch(new UsersActions.FetchWallet());
+
+  }
 }

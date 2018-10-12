@@ -3,11 +3,10 @@ import { HttpClient } from '@angular/common/http';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { map, switchMap, withLatestFrom } from 'rxjs/operators';
 
-import * as AccountActions from './users.actions';
 import { environment } from '../../../environments/environment';
 import { Store } from '@ngrx/store';
 import * as fromUsers from './users.reducers';
-import * as AdminActions from '../../modules/admin/store/admin.actions';
+import * as UsersActions from './users.actions';
 
 
 @Injectable()
@@ -17,7 +16,7 @@ export class UsersEffects {
   @Effect()
   userListFetch = this.actions$
     .pipe(
-      ofType(AdminActions.FETCH_USER_LIST),
+      ofType(UsersActions.FETCH_USER_LIST),
       withLatestFrom(this.store.select('users')),
       switchMap(([action, state]) => {
         return this.httpClient.get<any>(environment.apiServer.apiUrl + '/users/search/byFilter'
@@ -31,7 +30,7 @@ export class UsersEffects {
       map(
         (usersResponse) => {
           return {
-            type: AdminActions.SET_USER_LIST,
+            type: UsersActions.SET_USER_LIST,
             payload: usersResponse
           };
         }
@@ -41,7 +40,7 @@ export class UsersEffects {
   @Effect()
   userFetch = this.actions$
     .pipe(
-      ofType(AccountActions.FETCH_USER),
+      ofType(UsersActions.FETCH_USER),
       withLatestFrom(this.store.select('users')),
       switchMap(([action, state]) => {
         return this.httpClient.get<any>(environment.apiServer.apiUrl + '/users/' + state.selectedUser.id, {
@@ -50,10 +49,23 @@ export class UsersEffects {
         });
       }),
       map(
-        (selectedUser) => {
+        (user) => {
+          // return {
+          //   type: AccountActions.SET_USER,
+          //   payload: user
+          // };
+          const walletURL = user._links.wallet ? user._links.wallet.href : null;
+          const walletURLSub = walletURL ? walletURL.substr(walletURL.lastIndexOf('/') + 1) : null;
+          const walletID = Number(walletURLSub ? walletURLSub.substr(0, walletURLSub.indexOf('{')) : null);
           return {
-            type: AccountActions.SET_USER,
-            payload: selectedUser
+            type: UsersActions.SET_USER,
+            payload: {
+              id: user.id,
+              name: user.name,
+              email: user.email,
+              role: user.role,
+              walletId: walletID
+            }
           };
         }
       )
@@ -62,18 +74,21 @@ export class UsersEffects {
   @Effect()
   walletFetch = this.actions$
     .pipe(
-      ofType(AccountActions.FETCH_WALLET),
+      ofType(UsersActions.FETCH_WALLET),
       withLatestFrom(this.store.select('users')),
       switchMap(([action, state]) => {
-        return this.httpClient.get<any>(environment.apiServer.apiUrl + '/wallets/' + state.selectedUser.id, {
+        console.log('wallet!!');
+        console.log( state.selectedUser);
+        return this.httpClient.get<any>(environment.apiServer.apiUrl + '/wallets/' + state.selectedUser.walletId, {
           observe: 'body',
           responseType: 'json'
         });
       }),
       map(
         (userWallet) => {
+          console.log('wallet effect');
           return {
-            type: AccountActions.SET_WALLET,
+            type: UsersActions.SET_WALLET,
             payload: {
               balance: userWallet.balance,
               owner: userWallet._embedded.owner,

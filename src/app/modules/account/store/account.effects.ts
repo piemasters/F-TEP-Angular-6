@@ -14,24 +14,24 @@ import * as fromAccount from './account.reducers';
 export class AccountEffects {
   constructor(private actions$: Actions, private httpClient: HttpClient, private store: Store<fromAccount.FeatureState>) {}
 
-  @Effect()
-  walletFetch = this.actions$
-    .pipe(
-      ofType(AccountActions.FETCH_WALLET),
-      withLatestFrom(this.store.select('activeUser')),
-      switchMap(([action, state]) => {
-        return this.httpClient.get<Wallet>(environment.apiServer.apiUrl + '/wallets/' + state.activeUser.id , {
-          observe: 'body',
-          responseType: 'json'
-        });
-      }),
-      map(
-        (userWallet) => {
-          return {
-            type: AccountActions.SET_WALLET,
-            payload: userWallet
-          };
-        }
-      )
-    );
+  // @Effect()
+  // walletFetch = this.actions$
+  //   .pipe(
+  //     ofType(AccountActions.FETCH_WALLET),
+  //     withLatestFrom(this.store.select('activeUser')),
+  //     switchMap(([action, state]) => {
+  //       return this.httpClient.get<Wallet>(environment.apiServer.apiUrl + '/wallets/' + state.activeUser.id , {
+  //         observe: 'body',
+  //         responseType: 'json'
+  //       });
+  //     }),
+  //     map(
+  //       (userWallet) => {
+  //         return {
+  //           type: AccountActions.SET_WALLET,
+  //           payload: userWallet
+  //         };
+  //       }
+  //     )
+  //   );
 }

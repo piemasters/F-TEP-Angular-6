@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpRequest } from '@angular/common/http';
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { map, switchMap, withLatestFrom } from 'rxjs/operators';
+import { switchMap, withLatestFrom } from 'rxjs/operators';
 
 import * as AdminActions from './admin.actions';
 import { environment } from '../../../../environments/environment';
@@ -13,27 +13,19 @@ export class AdminEffects {
   constructor(private actions$: Actions, private httpClient: HttpClient, private store: Store<fromAdmin.FeatureState>) {}
 
   @Effect()
-  userListFetch = this.actions$
+  endorseCoins = this.actions$
     .pipe(
-      ofType(AdminActions.FETCH_USER_LIST),
+      ofType(AdminActions.ENDORSE_COINS),
       withLatestFrom(this.store.select('admin')),
       switchMap(([action, state]) => {
-        return this.httpClient.get<any>(environment.apiServer.apiUrl + '/users/search/byFilter'
-          + '?sort='  + (state.userSearch.sort ? state.userSearch.sort : '')
-          + '&filter=' + (state.userSearch.filter ? state.userSearch.filter : '')
-          + '&page=' + (state.userPage.number - 1 > 0 ? state.userPage.number - 1 : 0), {
-          observe: 'body',
-          responseType: 'json'
-        });
-      }),
-      map(
-        (usersResponse) => {
-          return {
-            type: AdminActions.SET_USER_LIST,
-            payload: usersResponse
-          };
-        }
-      )
+        const req = new HttpRequest(
+          'PUT',
+          environment.apiServer.apiUrl + '/wallets/' + state.selectedUser.id + '/credit',
+          { amount: state.coins },
+          { reportProgress: true }
+        );
+        return this.httpClient.request(req);
+      })
     );
 
 }

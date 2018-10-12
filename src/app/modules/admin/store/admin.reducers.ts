@@ -1,49 +1,35 @@
 import * as fromAdmin from '../../../store/app.reducers';
-import { User } from '../../../shared/models/user.model';
 import * as  AdminActions from './admin.actions';
 
 export interface FeatureState extends fromAdmin.AppState {
-  userList: User[];
-  userLinks: {};
-  userPage: {};
-  userSearch: {};
+  userBalance;
+  userRole;
+  coins;
 }
 
 export interface State {
-  userList: User[];
-  userLinks: {};
-  userPage: {};
-  userSearch: {};
+  userBalance;
+  userRole;
+  coins;
 }
 
 const initialState: State = {
-  userList: [
-    new User('Test User', 'GUEST', 'test.user@example.com', 1),
-    new User('Second User', 'GUEST', 'test2.user@example.com', 2)
-  ],
-  userLinks: {},
-  userPage: { size: 20, totalElements: 2, totalPages: 1, number: 0 },
-  userSearch: { filter: '', sort: 'name'}
+  userBalance: null,
+  userRole: null,
+  coins: 0
 };
 
 export function adminReducer(state = initialState, action: AdminActions.AdminActions) {
   switch (action.type) {
-    case AdminActions.SET_USER_LIST:
+    case AdminActions.ENDORSE_COINS:
       return {
         ...state,
-        userList: action.payload._embedded.users,
-        userLinks: action.payload._links,
-        userPage: action.payload.page
+        userBalance: action.payload
       };
-    case AdminActions.SET_USER_PAGE:
+    case AdminActions.SET_USER_ROLE:
       return {
         ...state,
-        userPage: { ...state, number: action.payload }
-      };
-    case AdminActions.SET_USER_SEARCH:
-      return {
-        ...state,
-        userSearch: { ...state, filter: action.payload.filter, sort: action.payload.sort }
+        userRole: action.payload
       };
     default:
       return state;

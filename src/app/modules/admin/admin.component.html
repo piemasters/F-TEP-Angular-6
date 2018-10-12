@@ -59,6 +59,7 @@
     </div>
 
     <div class="col-md-6">
+      <div>{{(usersState | async).selectedUser | json}}</div>
       <h2>Selected User</h2>
       <p>ID: {{(usersState | async).selectedUser.id}}</p>
       <p>Name: {{(usersState | async).selectedUser.name}}</p>
@@ -66,6 +67,7 @@
       <p>Role: {{(usersState | async).selectedUser.role}}</p>
 
       <div class="row">
+        <button (click)="getWallet()">Get User Wallet</button>
         <b class="col-md-4">Coin Balance:</b>
         <div class="col-md-8">{{(usersState | async).userWallet.balance }}</div>
       </div>
