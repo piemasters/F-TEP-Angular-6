@@ -15,4 +15,4 @@ export class FetchWallet implements Action {
   readonly type = FETCH_WALLET;
 }
 
-export type AccountActions = SetWallet |  FetchWallet;
+export type AccountActions = SetWallet | FetchWallet;

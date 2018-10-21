@@ -1,0 +1,77 @@
+<div class="page container-fluid">
+  <div class="row">
+    <div class="col-md-6">
+
+      <div id="user-list-card" class="card">
+        <div class="card-header">
+          <h2>User List</h2>
+        </div>
+        <div class="card-body">
+
+          <div class="filters-container">
+            <div class="input-group">
+
+              <input id="search-filter"  class="form-control" #userFilter type="text" placeholder="Search" (keyup)="onFilterKeyUp({'filter': userFilter.value})">
+              <div class="input-group-append">
+                <div id="sort-dropdown" ngbDropdown class="d-inline-block">
+                  <button class="btn btn-primary input-group-text" ngbDropdownToggle>
+                    Sort by: {{(usersState | async).userSearch.sort}}
+                  </button>
+                  <div ngbDropdownMenu aria-labelledby="sort-dropdown">
+                    <button *ngFor="let val of sortValues" class="dropdown-item" (click)="updateUserList({'sort': val})">
+                      {{val}}
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+
+
+          <div class="list-group">
+            <div *ngFor="let user of (usersState | async).userList | paginate: {
+                    id: 'users',
+                    itemsPerPage: (usersState | async).userPage.size,
+                    currentPage: (usersState | async).userPage.number + 1,
+                    totalItems: (usersState | async).userPage.totalElements
+                  }" (click)="selectUser(user)"
+                 class="list-group-item list-group-item-action flex-column align-items-start">
+              <div class="list-icon">
+                <fa-icon [icon]="['fas', 'user']"></fa-icon>
+              </div>
+              <div>
+                <h5 class="mb-1">{{ user.name }}</h5>
+                <div><b>Email:</b> {{ user.email }}</div>
+                <div><b>Role:</b> {{ user.role }}</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="centered-text">
+            <div class="spinner" [ngClass]="{ 'hidden': !loading }"></div>
+            <pagination-controls (pageChange)="updateUserList({'page': $event})" id="users"></pagination-controls>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div>{{(usersState | async).selectedUser | json}}</div>
+      <h2>Selected User</h2>
+      <p>ID: {{(usersState | async).selectedUser.id}}</p>
+      <p>Name: {{(usersState | async).selectedUser.name}}</p>
+      <p>Email: {{(usersState | async).selectedUser.email}}</p>
+      <p>Role: {{(usersState | async).selectedUser.role}}</p>
+
+      <div class="row">
+        <button (click)="getWallet()">Get User Wallet</button>
+        <b class="col-md-4">Coin Balance:</b>
+        <div class="col-md-8">{{(usersState | async).userWallet.balance }}</div>
+      </div>
+    </div>
+
+  </div>
+</div>

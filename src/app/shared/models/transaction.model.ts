@@ -2,7 +2,7 @@ import { User } from './user.model';
 
 export class Transaction {
   public owner: User;
-  public associatedId: number;
+  public associatedId?: number;
   public balanceChange: number;
   public transactionTime: string;
   public type: string;

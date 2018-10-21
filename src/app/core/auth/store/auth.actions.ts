@@ -15,4 +15,4 @@ export class FetchUser implements Action {
   readonly type = FETCH_ACTIVE_USER;
 }
 
-export type AuthActions = SetUser |  FetchUser;
+export type AuthActions = SetUser | FetchUser;

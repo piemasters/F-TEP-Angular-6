@@ -14,29 +14,9 @@ import * as AccountActions from './store/account.actions';
   styleUrls: ['./account.component.scss']
 })
 export class AccountComponent implements OnInit {
-  userState: Observable<{ activeUser: User }>;
-  accountState: Observable<{ userWallet: Wallet }>;
+  activeUserState: Observable<{ activeUser: User }>;
+  accountState: Observable<{ activeUserWallet: Wallet }>;
   urls = environment.urls;
-
-  wallet = {
-    balance: 100,
-    transactions: [
-      {
-        id: 1,
-        type: 'JOB',
-        associatedId: 628,
-        balanceChange: 5,
-        transactionTime: '2017-06-09T13:30:51.544'
-      },
-      {
-        id: 2,
-        type: 'DOWNLOAD',
-        balanceChange: -5,
-        transactionTime: '2017-06-09T13:30:51.544'
-      }
-
-    ]
-  };
 
   constructor(
     private store: Store<fromAccount.FeatureState>
@@ -45,7 +25,7 @@ export class AccountComponent implements OnInit {
   ngOnInit() {
     this.store.dispatch(new AccountActions.FetchWallet());
 
-    this.userState = this.store.select('activeUser');
+    this.activeUserState = this.store.select('activeUser');
     this.accountState = this.store.select('account');
   }
 

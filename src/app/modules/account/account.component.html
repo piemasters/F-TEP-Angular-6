@@ -1,85 +1,83 @@
 <div class="page container-fluid">
   <div class="row">
-  <div class="col-md-6">
+    <div class="col-md-6">
 
-    <div id="user-details-card" class="card">
-      <div class="card-header">
-        <h2>User Details</h2>
-      </div>
-      <div class="card-body">
-        <div class="row">
-          <b class="col-md-4">Username:</b>
-          <div class="col-md-8">{{ (userState | async).activeUser.name }}</div>
+      <div id="user-details-card" class="card">
+        <div class="card-header">
+          <h2>User Details</h2>
         </div>
-        <div class="row">
-          <b class="col-md-4">Role:</b>
-          <div class="col-md-8">{{ (userState | async).activeUser.role }}</div>
-        </div>
-        <div class="row">
-          <b class="col-md-4">Email:</b>
-          <div class="col-md-8">{{ (userState | async).activeUser.email }}</div>
-        </div>
-        <div class="row">
-          <b class="col-md-4">Coin Balance:</b>
-          <div class="col-md-8">{{(accountState | async).userWallet.balance }}</div>
-        </div>
-      </div>
-    </div>
-
-    <div id="requesting-coins-card" class="card">
-      <div class="card-header">
-        <h2>Requesting Coins</h2>
-      </div>
-      <div class="card-body">
-        <p>
-          To request more credit or to change your user role you can contact a F-TEP administrator using the
-          <a href="{{urls.ftepUrl}}/?q=content/contact" target="_blank">form</a> or by sending an email to
-          <a href="mailto:forestry-tep@esa.int?subject=F-TEP Coins/Roles" target="_top">forestry-tep@esa.int</a>.
-        </p>
-      </div>
-    </div>
-
-    <div id="manage-sso-card" class="card">
-      <div class="card-header">
-        <h2>Manage SSO</h2>
-      </div>
-      <div class="card-body">
-        <p>
-          You can modify your single sign-on account details, such as your name, email address and password, via the
-          <a href="{{urls.ssoUrl}}/idp/umsso20/admin" target="_blank">EO Single Sign-On Platform</a>.
-        </p>
-
-      </div>
-    </div>
-
-  </div>
-
-  <div class="col-md-6">
-
-    <div id="transactions-card" class="card">
-      <div class="card-header">
-        <h2>Transactions</h2>
-      </div>
-      <div class="card-body">
-        <p>
-          All logged transactions can be found below:
-        </p>
-
-        <div class="list-group">
-          <div *ngFor="let transaction of wallet.transactions" class="list-group-item list-group-item-action flex-column align-items-start">
-            <h5 class="mb-1">Transaction ID: {{ transaction.id }}</h5>
-            <div><b>Balance Change:</b> {{ transaction.balanceChange }}</div>
-            <div *ngIf="transaction.type == 'JOB'"><b>Associated Job ID:</b> {{ transaction.associatedId }}</div>
-            <div *ngIf="transaction.type == 'DOWNLOAD'"><b>Product Download</b></div>
-            <div><b>Date:</b> {{ transaction.transactionTime | date:'medium' }}</div>
+        <div class="card-body">
+          <div class="row">
+            <b class="col-md-4">Username:</b>
+            <div class="col-md-8">{{ (activeUserState | async).activeUser.name }}</div>
+          </div>
+          <div class="row">
+            <b class="col-md-4">Role:</b>
+            <div class="col-md-8">{{ (activeUserState | async).activeUser.role }}</div>
+          </div>
+          <div class="row">
+            <b class="col-md-4">Email:</b>
+            <div class="col-md-8">{{ (activeUserState | async).activeUser.email }}</div>
+          </div>
+          <div class="row">
+            <b class="col-md-4">Coin Balance:</b>
+            <div class="col-md-8">{{(accountState | async).activeUserWallet.balance }}</div>
           </div>
         </div>
-
       </div>
+
+      <div id="requesting-coins-card" class="card">
+        <div class="card-header">
+          <h2>Requesting Coins</h2>
+        </div>
+        <div class="card-body">
+          <p>
+            To request more credit or to change your user role you can contact a F-TEP administrator using the
+            <a href="{{urls.ftepUrl}}/?q=content/contact" target="_blank">form</a> or by sending an email to
+            <a href="mailto:forestry-tep@esa.int?subject=F-TEP Coins/Roles" target="_top">forestry-tep@esa.int</a>.
+          </p>
+        </div>
+      </div>
+
+      <div id="manage-sso-card" class="card">
+        <div class="card-header">
+          <h2>Manage SSO</h2>
+        </div>
+        <div class="card-body">
+          <p>
+            You can modify your single sign-on account details, such as your name, email address and password, via the
+            <a href="{{urls.ssoUrl}}/idp/umsso20/admin" target="_blank">EO Single Sign-On Platform</a>.
+          </p>
+
+        </div>
+      </div>
+
     </div>
 
+    <div class="col-md-6">
 
+      <div id="transactions-card" class="card">
+        <div class="card-header">
+          <h2>Transactions</h2>
+        </div>
+        <div class="card-body">
+          <p>
+            All logged transactions can be found below:
+          </p>
 
-  </div>
+          <div class="list-group">
+            <div *ngFor="let transaction of (accountState | async).activeUserWallet.transactions" class="list-group-item list-group-item-action flex-column align-items-start">
+              <h5 class="mb-1">Transaction ID: {{ transaction.id }}</h5>
+              <div><b>Balance Change:</b> {{ transaction.balanceChange }}</div>
+              <div *ngIf="transaction.type == 'JOB'"><b>Associated Job ID:</b> {{ transaction.associatedId }}</div>
+              <div *ngIf="transaction.type == 'DOWNLOAD'"><b>Product Download</b></div>
+              <div><b>Date:</b> {{ transaction.transactionTime | date:'medium' }}</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
   </div>
 </div>
