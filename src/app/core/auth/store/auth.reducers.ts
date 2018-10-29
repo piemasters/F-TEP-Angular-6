@@ -6,7 +6,7 @@ export interface State {
 }
 
 const initialState: State = {
-  activeUser: new User('Test User', 'GUEST', 'test.user@example.com', 1, 1)
+  activeUser: new User(1, 'Test User', 'GUEST', 'test.user@example.com', 1)
 };
 
 export function authReducer(state = initialState, action: AuthActions.AuthActions) {

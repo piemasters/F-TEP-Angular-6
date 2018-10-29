@@ -77,6 +77,13 @@ export class UsersEffects {
       ofType(UsersActions.FETCH_WALLET),
       withLatestFrom(this.store.select('users')),
       switchMap(([action, state]) => {
+        return this.httpClient.get<any>(environment.apiServer.apiUrl + '/users/' + state.selectedUser.id, {
+          observe: 'body',
+          responseType: 'json'
+        });
+      }),
+
+      switchMap(([action, state]) => {
         console.log('wallet!!');
         console.log( state.selectedUser);
         return this.httpClient.get<any>(environment.apiServer.apiUrl + '/wallets/' + state.selectedUser.walletId, {

@@ -14,10 +14,10 @@ export interface State {
 const initialState: State = {
   userWallet: new Wallet(
     0,
-    new User('Test User', 'GUEST', 'test.user@example.com', 1, 1),
+    new User(1, 'Test User', 'GUEST', 'test.user@example.com', 1),
     [
       {
-        owner: new User('Test User', 'GUEST', 'test.user@example.com', 1, 1),
+        owner: new User(1, 'Test User', 'GUEST', 'test.user@example.com', 1),
         associatedId: 628,
         balanceChange: 5,
         transactionTime: '2017-06-09T13:30:51.544',
@@ -25,7 +25,7 @@ const initialState: State = {
         id: 1
       },
       {
-        owner: new User('Test User', 'GUEST', 'test.user@example.com', 1, 1),
+        owner: new User(1, 'Test User', 'GUEST', 'test.user@example.com', 1),
         balanceChange: -5,
         transactionTime: '2017-06-09T13:30:51.544',
         type: 'DOWNLOAD',
@@ -33,10 +33,10 @@ const initialState: State = {
       }
     ]
   ),
-  selectedUser: new User('Test User', 'GUEST', 'test.user@example.com', 1, 1),
+  selectedUser: new User(1, 'Test User', 'GUEST', 'test.user@example.com', 1),
   userList: [
-    new User('Test User', 'GUEST', 'test.user@example.com', 1, 1),
-    new User('Second User', 'GUEST', 'test2.user@example.com', 2, 1)
+    new User(1, 'Test User', 'GUEST', 'test.user@example.com', 1),
+    new User(1, 'Second User', 'GUEST', 'test2.user@example.com', 2)
   ],
   userLinks: {},
   userPage: { size: 20, totalElements: 2, totalPages: 1, number: 0 },
