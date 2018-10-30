@@ -14,6 +14,8 @@ import { reducers } from './store/app.reducers';
 import { AuthInterceptor } from './core/auth/auth.interceptor';
 import { AuthEffects } from './core/auth/store/auth.effects';
 import { UsersEffects } from './store/users/users.effects';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -26,6 +28,10 @@ import { UsersEffects } from './store/users/users.effects';
     NgbModule,
     CustomPipesModule,
     StoreModule.forRoot(reducers),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25, // Retains last 25 states
+      logOnly: environment.production, // Restrict extension to log-only mode
+    }),
     EffectsModule.forRoot([AuthEffects, UsersEffects]),
     StoreRouterConnectingModule,
     HttpClientModule
