@@ -10,7 +10,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HeaderComponent } from './core/header/header.component';
 import { CustomPipesModule } from './shared/pipes/custom-pipes.module';
-import { reducers } from './store/app.reducers';
+import { metaReducers, reducers } from './store/app.reducers';
 import { AuthInterceptor } from './core/auth/auth.interceptor';
 import { AuthEffects } from './core/auth/store/auth.effects';
 import { UsersEffects } from './store/users/users.effects';
@@ -27,13 +27,10 @@ import { environment } from '../environments/environment';
     AppRoutingModule,
     NgbModule,
     CustomPipesModule,
-    StoreModule.forRoot(reducers),
-    StoreDevtoolsModule.instrument({
-      maxAge: 25, // Retains last 25 states
-      logOnly: environment.production, // Restrict extension to log-only mode
-    }),
+    StoreModule.forRoot(reducers, { metaReducers }),
+    !environment.production ? StoreDevtoolsModule.instrument()  : [],
+    StoreRouterConnectingModule.forRoot({stateKey: 'router'}),
     EffectsModule.forRoot([AuthEffects, UsersEffects]),
-    StoreRouterConnectingModule,
     HttpClientModule
   ],
   providers: [
