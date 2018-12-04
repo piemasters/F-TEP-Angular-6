@@ -7,7 +7,7 @@ import * as fromUsers from './users/users.reducers';
 import { environment } from '../../environments/environment';
 
 export interface AppState {
-  router: {};
+  router: any;
   activeUser: fromAuth.State;
   users: fromUsers.State;
 }
